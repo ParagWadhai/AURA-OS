@@ -1,0 +1,13 @@
+from app.core.config import settings
+
+JWT_SECRET_KEY = settings.JWT_SECRET_KEY
+
+JWT_ALGORITHM = settings.JWT_ALGORITHM
+
+ACCESS_TOKEN_EXPIRE_MINUTES = (
+    settings.JWT_ACCESS_TOKEN_EXPIRE_MINUTES
+)
+
+REFRESH_TOKEN_EXPIRE_DAYS = (
+    settings.JWT_REFRESH_TOKEN_EXPIRE_DAYS
+)
