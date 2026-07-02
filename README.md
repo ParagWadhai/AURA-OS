@@ -27,28 +27,55 @@ Users will eventually be able to ask questions such as:
 
 # Current Progress
 
-## Sprint 1 – Foundation
+## Sprint 1 – Foundation (Completed)
 
-### Completed
+### Infrastructure
 
-* Project repository initialized
-* Production-ready folder structure
-* Docker-based development environment
-* FastAPI backend setup
-* PostgreSQL container
-* Redis container
-* ChromaDB container
-* MLflow container
-* Environment configuration
-* FastAPI health endpoints
-* Swagger API documentation
+- ✅ Git repository initialized
+- ✅ Production-ready project structure
+- ✅ Docker Compose environment
+- ✅ Docker-first development workflow
 
-### In Progress
+### Backend
 
-* Application configuration
-* Logging
-* Database integration
+- ✅ FastAPI application
+- ✅ Modular backend architecture
+- ✅ Configuration management using Pydantic Settings
+- ✅ Centralized logging configuration
+- ✅ Environment variable management
 
+### Database
+
+- ✅ PostgreSQL container
+- ✅ SQLAlchemy 2.0 integration
+- ✅ Database session management
+- ✅ Declarative Base configuration
+- ✅ User ORM model
+- ✅ Alembic migration setup
+- ✅ Initial database migration
+
+### AI Infrastructure
+
+- ✅ ChromaDB container
+- ✅ Redis container
+- ✅ MLflow container
+
+### API
+
+- ✅ Health endpoint
+- ✅ Root endpoint
+- ✅ OpenAPI / Swagger documentation
+
+---
+
+## Sprint 2 – Authentication (Upcoming)
+
+- JWT Authentication
+- User Registration
+- Login
+- Password Hashing
+- Refresh Tokens
+- Role-Based Access Control
 ---
 
 # Project Structure
@@ -100,17 +127,19 @@ AURA-OS/
 
 ## Backend
 
-* Python 3.12
-* FastAPI
-* SQLAlchemy
-* Alembic
-* PostgreSQL
-* Redis
-* ChromaDB
-* LangChain
-* Sentence Transformers
-* PyTorch
-* MLflow
+- Python 3.12
+- FastAPI
+- SQLAlchemy 2.0
+- Alembic
+- PostgreSQL
+- Redis
+- ChromaDB
+- LangChain
+- Sentence Transformers
+- PyTorch
+- MLflow
+- Pydantic Settings
+- JWT (Upcoming)
 
 ## Frontend (Planned)
 
@@ -154,6 +183,43 @@ AURA-OS/
        MLflow
 ```
 
+## Backend Architecture
+
+The backend follows **Clean Architecture** principles to ensure scalability, maintainability, and separation of concerns.
+
+```text
+Client
+   │
+   ▼
+FastAPI Routes
+   │
+   ▼
+Service Layer
+   │
+   ▼
+Repository Layer
+   │
+   ▼
+SQLAlchemy ORM
+   │
+   ▼
+PostgreSQL
+```
+
+### Core Modules
+
+| Module | Responsibility |
+|---------|----------------|
+| api | API endpoints |
+| services | Business logic |
+| repositories | Database operations |
+| models | SQLAlchemy ORM models |
+| schemas | Pydantic request/response models |
+| db | Database engine & session |
+| core | Configuration, logging, security |
+| middleware | Request/response middleware |
+| workers | Background processing |
+
 ---
 
 # Running the Project
@@ -162,6 +228,80 @@ AURA-OS/
 
 * Docker Desktop
 * Git
+
+# Database Migrations
+
+AURA-OS uses **Alembic** for database version control.
+
+## Generate a Migration
+
+```bash
+alembic revision --autogenerate -m "migration_name"
+```
+
+## Apply Migration
+
+```bash
+alembic upgrade head
+```
+
+## Roll Back
+
+```bash
+alembic downgrade -1
+```
+
+Database schema changes are tracked through version-controlled migrations to ensure consistent deployments across development, staging, and production environments.
+
+# Current Database Schema
+
+## Users
+
+| Column | Type |
+|----------|------|
+| id | Integer |
+| full_name | String |
+| email | String |
+| password_hash | String |
+| is_active | Boolean |
+| created_at | Timestamp |
+
+Additional tables will be introduced in future sprints:
+
+- Notifications
+- SMS
+- Calendar Events
+- Notes
+- Contacts
+- Chat History
+- AI Summaries
+
+
+# Development Workflow
+
+The project follows a Docker-first development workflow.
+
+```text
+VS Code
+    │
+    ▼
+Docker Compose
+    │
+    ├── FastAPI
+    ├── PostgreSQL
+    ├── Redis
+    ├── ChromaDB
+    └── MLflow
+```
+
+Database schema changes are managed using Alembic migrations.
+
+Backend development follows a layered architecture:
+
+- API Layer
+- Service Layer
+- Repository Layer
+- Database Layer
 
 ---
 
@@ -243,52 +383,69 @@ http://localhost:8000/docs
 
 # Development Roadmap
 
-## Sprint 1
+## Sprint 1 ✅ Completed
 
-* Foundation
-* Docker
-* FastAPI
-* Infrastructure
-* Database Setup
+- Project Structure
+- Docker Infrastructure
+- FastAPI Setup
+- Configuration Management
+- PostgreSQL Integration
+- SQLAlchemy ORM
+- Alembic Migrations
+- User Database Model
 
-## Sprint 2
+---
 
-* Authentication
-* JWT
-* User Management
-* Database Models
+## Sprint 2 🚧 Next
+
+- Authentication
+- JWT
+- User Registration
+- Login
+- Refresh Tokens
+- RBAC
+
+---
 
 ## Sprint 3
 
-* Android Data Collection
-* Notification Sync
-* SMS Sync
-* Calendar Sync
+- Android Notification Listener
+- SMS Collector
+- Calendar Collector
+- Background Synchronization
+
+---
 
 ## Sprint 4
 
-* Embedding Pipeline
-* Chroma Integration
-* Semantic Search
+- Embedding Pipeline
+- ChromaDB Integration
+- Semantic Search
+
+---
 
 ## Sprint 5
 
-* LLM Integration
-* RAG Pipeline
-* AI Chat
+- RAG Pipeline
+- LLM Integration
+- AI Chat
+
+---
 
 ## Sprint 6
 
-* React Dashboard
-* Timeline
-* Search Interface
-* Analytics
+- React Dashboard
+- Timeline
+- Analytics
+- Search Interface
+
+---
 
 ## Sprint 7
 
-* MLflow Integration
-* Kubernetes
-* AWS Deployment
+- MLflow Tracking
+- Kubernetes
+- AWS Deployment
 
 ---
 

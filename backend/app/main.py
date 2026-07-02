@@ -2,6 +2,7 @@ from fastapi import FastAPI
 
 from app.core.config import settings
 from app.core.logging import configure_logging
+from app.api.v1.api import router
 
 configure_logging()
 
@@ -28,3 +29,7 @@ async def health():
         "environment": settings.APP_ENV,
     }
 
+app.include_router(
+    router,
+    prefix=settings.API_V1_PREFIX,
+)
